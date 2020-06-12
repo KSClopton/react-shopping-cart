@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState , useContext } from 'react';
+import { BookContext } from '../BookContext'
 
 // Components
 import Product from './Product';
 
-const Products = props => {
+const Products = () => {
+	const [products, cart, setCart] = useContext(BookContext);
+	const addItem = item => {
+		// add the given item to the cart
+		setCart([...cart, item])
+	};
 	return (
 		<div className="products-container">
-			{props.products.map(product => (
+			{products.map(product => (
 				<Product
 					key={product.id}
 					product={product}
-					addItem={props.addItem}
+					addItem={addItem}
 				/>
 			))}
 		</div>
